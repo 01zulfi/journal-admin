@@ -1,11 +1,41 @@
 import React, { FC, useState } from 'react';
 import onTextInputChange from '../../utils/on-text-input-change';
 
-const Login: FC = function Login() {
+interface LoginProps {
+  onLogin: any;
+}
+
+const Login: FC<LoginProps> = function Login({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const onFormSubmit = () => {};
+  const onFormSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    try {
+      const response = await fetch(
+        'https://journal-rest-api.herokuapp.com/login',
+        {
+          method: 'POST',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username, password }),
+        },
+      );
+      const data = await response.json();
+      if (response.status === 200) {
+        setErrorMessage('');
+        localStorage.setItem('token', data.token);
+        onLogin();
+        return;
+      }
+      setErrorMessage(data.message);
+    } catch (error: any) {
+      setErrorMessage(error.message);
+    }
+  };
 
   return (
     <section>
@@ -19,18 +49,21 @@ const Login: FC = function Login() {
             name="username"
             value={username}
             onChange={onTextInputChange(setUsername)}
+            required
           />
         </label>
         <label htmlFor="password">
           Password:
           <input
-            type="text"
+            type="password"
             id="password"
             name="password"
             value={password}
             onChange={onTextInputChange(setPassword)}
+            required
           />
         </label>
+        <div>{errorMessage !== '' && errorMessage}</div>
         <button type="submit" onClick={onFormSubmit}>
           Login
         </button>
