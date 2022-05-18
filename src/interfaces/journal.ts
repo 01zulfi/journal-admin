@@ -1,12 +1,12 @@
 interface JournalInterface {
-  title: String;
-  content: String;
-  date: String;
-  publish: Boolean;
-  author: String;
+  title: string;
+  content: string;
+  date: string;
+  publish: boolean;
+  author: string;
   createdAt: Date;
   updatedAt: Date;
-  _id: String;
+  _id: string;
 }
 
 export default JournalInterface;
