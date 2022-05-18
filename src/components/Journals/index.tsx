@@ -15,6 +15,7 @@ const Journals: FC = function Journals() {
         const data = await response.json();
         setIsLoading(false);
         if (response.status === 200) {
+          setErrorMessage('');
           setJournals(data.journals);
           return;
         }
@@ -27,7 +28,11 @@ const Journals: FC = function Journals() {
   }, []);
 
   if (isLoading) {
-    return <section>Loading...</section>;
+    return (
+      <section>
+        <p>Loading...</p>
+      </section>
+    );
   }
 
   if (errorMessage) {
@@ -37,7 +42,7 @@ const Journals: FC = function Journals() {
   return (
     <section>
       {journals.map((journal) => (
-        <div>
+        <div key={journal._id}>
           <h3>{journal.title}</h3>
           <button type="button">Edit</button>
         </div>
