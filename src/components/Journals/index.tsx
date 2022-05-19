@@ -15,6 +15,11 @@ const Journals: FC<JournalsProps> = function Journals({ onEditButtonClick }) {
       try {
         const response = await fetch(
           'https://journal-rest-api.herokuapp.com/journal',
+          {
+            headers: {
+              Authorization: `bearer ${localStorage.getItem('token')}`,
+            },
+          },
         );
         const data = await response.json();
         setIsLoading(false);
