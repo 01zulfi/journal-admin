@@ -1,7 +1,11 @@
 import React, { FC, useState, useEffect } from 'react';
 import JournalInterface from '../../interfaces/journal';
 
-const Journals: FC = function Journals() {
+interface JournalsProps {
+  onEditButtonClick: any;
+}
+
+const Journals: FC<JournalsProps> = function Journals({ onEditButtonClick }) {
   const [journals, setJournals] = useState<JournalInterface[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
@@ -27,6 +31,8 @@ const Journals: FC = function Journals() {
     })();
   }, []);
 
+  const editHandler = (id: string) => () => onEditButtonClick(id);
+
   if (isLoading) {
     return (
       <section>
@@ -44,7 +50,9 @@ const Journals: FC = function Journals() {
       {journals.map((journal) => (
         <div key={journal._id}>
           <h3>{journal.title}</h3>
-          <button type="button">Edit</button>
+          <button type="button" onClick={editHandler(journal._id)}>
+            Edit
+          </button>
         </div>
       ))}
     </section>

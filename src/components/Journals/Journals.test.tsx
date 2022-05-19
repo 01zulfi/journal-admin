@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import userEvent from '@testing-library/user-event';
 import Journals from './index';
 
 const mockJournals = [
@@ -22,7 +23,7 @@ describe('tests Journal component', () => {
         status: 404,
       }),
     ) as jest.Mock;
-    render(<Journals />);
+    render(<Journals onEditButtonClick={() => {}} />);
     const loading = screen.getByText('Loading...');
 
     await waitFor(() => expect(loading).not.toBeInTheDocument());
@@ -35,7 +36,7 @@ describe('tests Journal component', () => {
         status: 200,
       }),
     ) as jest.Mock;
-    render(<Journals />);
+    render(<Journals onEditButtonClick={() => {}} />);
 
     const journalOne = await screen.findByText('journal1');
     const journalTwo = await screen.findByText('journal2');
@@ -51,10 +52,30 @@ describe('tests Journal component', () => {
         status: 404,
       }),
     ) as jest.Mock;
-    render(<Journals />);
+    render(<Journals onEditButtonClick={() => {}} />);
 
     const errorMessage = await screen.findByText('error error');
 
     expect(errorMessage).toBeInTheDocument();
+  });
+
+  it('calls onEditButtonClick handler with correct argument', async () => {
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        json: () => Promise.resolve({ journals: mockJournals }),
+        status: 200,
+      }),
+    ) as jest.Mock;
+
+    const mockOnEditButtonClick = jest.fn();
+    render(<Journals onEditButtonClick={mockOnEditButtonClick} />);
+
+    const journalEditButtons = await screen.findAllByRole('button');
+
+    userEvent.click(journalEditButtons[0]);
+    expect(mockOnEditButtonClick).toBeCalledWith('1');
+
+    userEvent.click(journalEditButtons[1]);
+    expect(mockOnEditButtonClick).toBeCalledWith('2');
   });
 });
