@@ -4,7 +4,7 @@
 
 @layer base {
   .button {
-    @apply bg-purple-500 p-3 text-xl rounded hover:brightness-150;
+    @apply bg-purple-500 p-1 rounded hover:brightness-125;
   }
   .input {
     @apply bg-gray-300 rounded p-2;

@@ -40,8 +40,12 @@ const App: FC = function App() {
   }
 
   return (
-    <section className="">
-      <button type="button" onClick={() => setShowNewJournalForm(true)}>
+    <section className="m-4 sm:ml-16">
+      <button
+        type="button"
+        className="button bg-custom-yellow my-4 w-[10rem]"
+        onClick={() => setShowNewJournalForm(true)}
+      >
         New
       </button>
       <Journals

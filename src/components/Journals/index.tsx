@@ -51,11 +51,20 @@ const Journals: FC<JournalsProps> = function Journals({ onEditButtonClick }) {
   }
 
   return (
-    <section>
+    <section className="flex flex-col gap-4">
       {journals.map((journal) => (
-        <div key={journal._id}>
-          <h3>{journal.title}</h3>
-          <button type="button" onClick={editHandler(journal._id)}>
+        <div
+          key={journal._id}
+          className={`flex justify-between sm:w-4/5 outline-2 outline-purple-50 rounded shadow-md hover:bg-gray-100 p-2 align-center border-l-4 border-solid ${
+            journal.publish ? 'border-green-400' : 'border-red-400'
+          }`}
+        >
+          <h3 className="text-xl">{journal.title}</h3>
+          <button
+            className="button w-fit h-fit"
+            type="button"
+            onClick={editHandler(journal._id)}
+          >
             Edit
           </button>
         </div>

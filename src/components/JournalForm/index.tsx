@@ -29,12 +29,15 @@ const JournalForm: FC<JournalFormProps> = function JournalForm({
   };
 
   return (
-    <section>
-      <h2>{heading}</h2>
-      <form>
-        <label htmlFor="title">
+    <section className="">
+      <h2 className="text-3xl underline font-bold text-purple-500">
+        {heading}
+      </h2>
+      <form className="my-6 pb-4 sm:w-4/5 shadow-md bg-purple-50 flex flex-col rounded p-2 gap-2">
+        <label htmlFor="title" className="label-input">
           Title:
           <input
+            className="input"
             type="text"
             name="title"
             id="title"
@@ -43,9 +46,10 @@ const JournalForm: FC<JournalFormProps> = function JournalForm({
             onChange={onTextInputChange(setTitle)}
           />
         </label>
-        <label htmlFor="url-name">
+        <label htmlFor="url-name" className="label-input">
           Url Name:
           <input
+            className="input"
             type="text"
             name="urlName"
             id="url-name"
@@ -54,20 +58,23 @@ const JournalForm: FC<JournalFormProps> = function JournalForm({
             onChange={onTextInputChange(setUrlName)}
           />
         </label>
-        <label htmlFor="content">
+        <label htmlFor="content" className="label-input">
           Content:
           <textarea
+            className="input"
             name="content"
             id="content"
-            cols={30}
-            rows={10}
+            cols={50}
+            rows={20}
             value={content}
             onChange={onTextInputChange(setContent)}
           />
         </label>
-        <label htmlFor="publish">
+        <hr className="my-2" />
+        <label htmlFor="publish" className="flex gap-2 items-center w-fit">
           Publish
           <input
+            className=" h-6 w-4"
             type="checkbox"
             name="publish"
             id="publish"
@@ -77,7 +84,12 @@ const JournalForm: FC<JournalFormProps> = function JournalForm({
             }}
           />
         </label>
-        <button type="submit" onClick={onSubmitButtonClick}>
+        <hr className="my-2" />
+        <button
+          type="submit"
+          className="button bg-custom-green"
+          onClick={onSubmitButtonClick}
+        >
           Submit
         </button>
       </form>
