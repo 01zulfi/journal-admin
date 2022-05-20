@@ -38,12 +38,13 @@ const Login: FC<LoginProps> = function Login({ onLogin }) {
   };
 
   return (
-    <section>
-      <h2>Login</h2>
-      <form>
-        <label htmlFor="username">
+    <section className="m-4 sm:ml-16">
+      <h2 className="text-3xl underline font-bold text-purple-500">Login</h2>
+      <form className="my-6 pb-4 sm:w-3/5 shadow-md bg-purple-50 flex flex-col rounded p-2 gap-2">
+        <label htmlFor="username" className="label-input">
           Username:
           <input
+            className="input"
             type="text"
             id="username"
             name="username"
@@ -52,9 +53,10 @@ const Login: FC<LoginProps> = function Login({ onLogin }) {
             required
           />
         </label>
-        <label htmlFor="password">
+        <label htmlFor="password" className="label-input">
           Password:
           <input
+            className="input"
             type="password"
             id="password"
             name="password"
@@ -63,8 +65,10 @@ const Login: FC<LoginProps> = function Login({ onLogin }) {
             required
           />
         </label>
-        <div>{errorMessage !== '' && errorMessage}</div>
-        <button type="submit" onClick={onFormSubmit}>
+        <div className="text-purple-500">
+          {errorMessage !== '' && errorMessage}
+        </div>
+        <button className="button w-fit" type="submit" onClick={onFormSubmit}>
           Login
         </button>
       </form>

@@ -13,7 +13,7 @@ const App: FC = function App() {
 
   if (!isLoggedIn) {
     return (
-      <section>
+      <section className="">
         <Login onLogin={() => setIsLoggedIn(true)} />
       </section>
     );
@@ -40,7 +40,7 @@ const App: FC = function App() {
   }
 
   return (
-    <section>
+    <section className="">
       <button type="button" onClick={() => setShowNewJournalForm(true)}>
         New
       </button>

@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  .button {
+    @apply bg-purple-500 p-3 text-xl rounded hover:brightness-150;
+  }
+  .input {
+    @apply bg-gray-300 rounded p-2;
+  }
+  .label-input {
+    @apply flex flex-col gap-2;
+  }
+}
