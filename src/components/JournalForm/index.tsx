@@ -14,12 +14,18 @@ const JournalForm: FC<JournalFormProps> = function JournalForm({
   onFormSubmit,
 }) {
   const [title, setTitle] = useState(journal?.title || '');
+  const [urlName, setUrlName] = useState(journal?.urlName || '');
   const [content, setContent] = useState(journal?.content || '');
   const [publish, setPublish] = useState(journal?.publish || false);
 
   const onSubmitButtonClick = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    onFormSubmit({ title, content, publish });
+    onFormSubmit({
+      title,
+      content,
+      publish,
+      urlName,
+    });
   };
 
   return (
@@ -35,6 +41,17 @@ const JournalForm: FC<JournalFormProps> = function JournalForm({
             required
             value={title}
             onChange={onTextInputChange(setTitle)}
+          />
+        </label>
+        <label htmlFor="url-name">
+          Url Name:
+          <input
+            type="text"
+            name="urlName"
+            id="url-name"
+            required
+            value={urlName}
+            onChange={onTextInputChange(setUrlName)}
           />
         </label>
         <label htmlFor="content">
@@ -71,6 +88,7 @@ const JournalForm: FC<JournalFormProps> = function JournalForm({
 JournalForm.defaultProps = {
   journal: {
     title: '',
+    urlName: '',
     content: '',
     publish: false,
     date: '',

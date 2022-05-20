@@ -1,5 +1,6 @@
 interface JournalInterface {
   title: string;
+  urlName: string;
   content: string;
   date: string;
   publish: boolean;

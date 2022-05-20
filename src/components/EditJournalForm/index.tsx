@@ -42,6 +42,7 @@ const EditJournalForm: FC<EditJournalFormProps> = function EditJournalForm({
 
   const editJournal = async (data: {
     title: string;
+    urlName: string;
     content: string;
     publish: boolean;
   }) => {

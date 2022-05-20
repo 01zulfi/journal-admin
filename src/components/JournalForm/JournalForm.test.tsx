@@ -67,6 +67,7 @@ describe('tests JournalForm component', () => {
         title: '',
         content: '',
         publish: false,
+        urlName: '',
       });
     });
   });
@@ -74,6 +75,7 @@ describe('tests JournalForm component', () => {
   describe('when journal is provided', () => {
     const mockJournal = {
       title: 'Journal Title',
+      urlName: 'journal-title',
       content: '### h',
       publish: false,
       author: '',
@@ -140,6 +142,7 @@ describe('tests JournalForm component', () => {
 
       expect(mockOnFormSubmit).toBeCalledWith({
         title: 'Journal Title',
+        urlName: 'journal-title',
         content: '### h',
         publish: false,
       });

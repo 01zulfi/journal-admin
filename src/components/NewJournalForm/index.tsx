@@ -9,6 +9,7 @@ const NewJournalForm: FC = function NewJournalForm() {
 
   const createNewJournal = async (data: {
     title: string;
+    urlName: string;
     content: string;
     publish: boolean;
   }) => {
