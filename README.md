@@ -2,6 +2,8 @@
 
 **[App Link](https://journal-admin.netlify.app/)**
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ef34ab9c-13b6-4b30-8e2f-8ae14b5a5581/deploy-status)](https://app.netlify.com/sites/journal-admin/deploys)
+
 ## About
 
 Journal Admin is a frontend React/TypeScript application that allows user to interact with the MongoDB data via the Journal REST API. It can create, update, and mark posts as published when ready. Published posts are then visible on my Journal application intended for general consumption.
