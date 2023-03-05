@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
 import onTextInputChange from '../../utils/on-text-input-change';
+import { endpoint } from '../../endpoint.const';
 
 interface LoginProps {
   onLogin: any;
@@ -13,17 +14,14 @@ const Login: FC<LoginProps> = function Login({ onLogin }) {
   const onFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      const response = await fetch(
-        'https://journal-rest-api.herokuapp.com/login',
-        {
-          method: 'POST',
-          mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ username, password }),
+      const response = await fetch(`${endpoint}/login`, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      );
+        body: JSON.stringify({ username, password }),
+      });
       const data = await response.json();
       if (response.status === 200) {
         setErrorMessage('');

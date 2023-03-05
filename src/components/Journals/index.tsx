@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import JournalInterface from '../../interfaces/journal';
+import { endpoint } from '../../endpoint.const';
 
 interface JournalsProps {
   onEditButtonClick: any;
@@ -13,14 +14,11 @@ const Journals: FC<JournalsProps> = function Journals({ onEditButtonClick }) {
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch(
-          'https://journal-rest-api.herokuapp.com/journal',
-          {
-            headers: {
-              Authorization: `bearer ${localStorage.getItem('token')}`,
-            },
+        const response = await fetch(`${endpoint}/journal`, {
+          headers: {
+            Authorization: `bearer ${localStorage.getItem('token')}`,
           },
-        );
+        });
         const data = await response.json();
         setIsLoading(false);
         if (response.status === 200) {

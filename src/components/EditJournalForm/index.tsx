@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import JournalForm from '../JournalForm';
+import { endpoint } from '../../endpoint.const';
 
 interface EditJournalFormProps {
   journalId: string;
@@ -17,14 +18,11 @@ const EditJournalForm: FC<EditJournalFormProps> = function EditJournalForm({
     (async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(
-          `https://journal-rest-api.herokuapp.com/journal/${journalId}`,
-          {
-            headers: {
-              Authorization: `bearer ${localStorage.getItem('token')}`,
-            },
+        const response = await fetch(`${endpoint}/journal/${journalId}`, {
+          headers: {
+            Authorization: `bearer ${localStorage.getItem('token')}`,
           },
-        );
+        });
         const responseData = await response.json();
         if (response.status === 200) {
           setJournalData(responseData.journal);
@@ -49,17 +47,14 @@ const EditJournalForm: FC<EditJournalFormProps> = function EditJournalForm({
     setIsLoading(true);
     setJournalData(data);
     try {
-      const response = await fetch(
-        `https://journal-rest-api.herokuapp.com/journal/${journalId}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `bearer ${localStorage.getItem('token')}`,
-          },
-          body: JSON.stringify(data),
+      const response = await fetch(`${endpoint}/journal/${journalId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `bearer ${localStorage.getItem('token')}`,
         },
-      );
+        body: JSON.stringify(data),
+      });
       const responseData = await response.json();
       if (response.status === 200) {
         setErrorMessage('');

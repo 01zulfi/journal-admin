@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react';
 import JournalForm from '../JournalForm';
+import { endpoint } from '../../endpoint.const';
 
 const NewJournalForm: FC = function NewJournalForm() {
   const [journalData, setJournalData] = useState<any>({});
@@ -16,17 +17,14 @@ const NewJournalForm: FC = function NewJournalForm() {
     setIsLoading(true);
     setJournalData(data);
     try {
-      const response = await fetch(
-        'https://journal-rest-api.herokuapp.com/journal',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `bearer ${localStorage.getItem('token')}`,
-          },
-          body: JSON.stringify(data),
+      const response = await fetch(`${endpoint}/journal`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `bearer ${localStorage.getItem('token')}`,
         },
-      );
+        body: JSON.stringify(data),
+      });
       const responseData = await response.json();
       if (response.status === 200) {
         setErrorMessage('');
