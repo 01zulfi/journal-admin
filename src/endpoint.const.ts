@@ -1,1 +1,1 @@
-export const endpoint = 'https://journal-rest-api.cyclic.app/';
+export const endpoint = 'https://journal-api.adaptable.app/';
